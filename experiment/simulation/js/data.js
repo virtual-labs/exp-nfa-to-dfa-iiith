@@ -3,34 +3,96 @@ const nfa1 = {
   "vertices": [
     {"text": "A", "type": "start"},
     {"text": "B", "type": "none"},
-    {"text": "C", "type": "none"},
-    {"text": "D", "type": "accept"}
+    {"text": "C", "type": "accept"}
   ],
   "edges": [
-    {"start": "A", "end": "A", "text": "0,1", "type": "self"},
+    {"start": "A", "end": "A", "text": "0", "type": "self"},
     {"start": "A", "end": "B", "text": "1", "type": "forward"},
+    {"start": "B", "end": "B", "text": "0,1", "type": "self"},
     {"start": "B", "end": "C", "text": "0", "type": "forward"},
-    {"start": "C", "end": "D", "text": "1", "type": "forward"},
-    {"start": "D", "end": "D", "text": "0,1", "type": "self"}
+    {"start": "C", "end": "C", "text": "0,1", "type": "self"},
+    {"start": "C", "end": "B", "text": "1", "type": "backward"}
   ],
   "input": [
     {
-      "string": "010110",
-      "states": ["A", "A", "B", "C", "D", "D", "D"],
-      "reject_path": ["A", "A", "A", "A", "A", "B", "C"]
+      "string": "1010",
+      "states": ["A", "B", "C", "B", "C"],
+      "reject_path": ["A", "B", "C", "B", "B"]
     },
     {
-      "string": "1011111",
-      "states": ["A", "B", "C", "D", "D", "D", "D", "D"],
-      "reject_path": ["A", "A", "A", "B", "B", "B", "B", "B"]
+      "string": "0110",
+      "states": ["A", "A", "B", "B", "C"],
+      "reject_path": ["A", "A", "B", "B", "B"]
     },
     {
-      "string": "001101111",
-      "states": ["A", "A", "A", "A", "B", "C", "D", "D", "D", "D"],
-      "reject_path": ["A", "A", "A", "A", "A", "A", "A", "A", "A", "A"]
+      "string": "1100",
+      "states": ["A", "B", "B", "C", "C"],
+      "reject_path": ["A", "B", "B", "B", "B"]
     }
   ]
 }
+
+const dfa1 = {
+  "vertices": [
+    {"text": "A", "type": "start"},
+    {"text": "B", "type": "none"},
+    {"text": "C", "type": "accept"}
+  ],
+  "edges": [
+    {"start": "A", "end": "A", "text": "0", "type": "self"},
+    {"start": "A", "end": "B", "text": "1", "type": "forward"},
+    {"start": "B", "end": "B", "text": "1", "type": "self"},
+    {"start": "B", "end": "C", "text": "0", "type": "forward"},
+    {"start": "C", "end": "C", "text": "0,1", "type": "self"},
+  ],
+  "input": [
+    {
+      "string": "1010",
+      "states": ["A", "B", "C", "C", "C"]
+    },
+    {
+      "string": "0110",
+      "states": ["A", "A", "B", "B", "C"]
+    },
+    {
+      "string": "1100",
+      "states": ["A", "B", "B", "C", "C"]
+    }
+  ]
+}
+
+// const nfa1 = {
+//   "vertices": [
+//     {"text": "A", "type": "start"},
+//     {"text": "B", "type": "none"},
+//     {"text": "C", "type": "none"},
+//     {"text": "D", "type": "accept"}
+//   ],
+//   "edges": [
+//     {"start": "A", "end": "A", "text": "0,1", "type": "self"},
+//     {"start": "A", "end": "B", "text": "1", "type": "forward"},
+//     {"start": "B", "end": "C", "text": "0", "type": "forward"},
+//     {"start": "C", "end": "D", "text": "1", "type": "forward"},
+//     {"start": "D", "end": "D", "text": "0,1", "type": "self"}
+//   ],
+//   "input": [
+//     {
+//       "string": "010110",
+//       "states": ["A", "A", "B", "C", "D", "D", "D"],
+//       "reject_path": ["A", "A", "A", "A", "A", "B", "C"]
+//     },
+//     {
+//       "string": "1011111",
+//       "states": ["A", "B", "C", "D", "D", "D", "D", "D"],
+//       "reject_path": ["A", "A", "A", "B", "B", "B", "B", "B"]
+//     },
+//     {
+//       "string": "001101111",
+//       "states": ["A", "A", "A", "A", "B", "C", "D", "D", "D", "D"],
+//       "reject_path": ["A", "A", "A", "A", "A", "A", "A", "A", "A", "A"]
+//     }
+//   ]
+// }
 
 const nfa2 = {
   "vertices": [
