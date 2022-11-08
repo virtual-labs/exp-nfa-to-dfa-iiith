@@ -3,39 +3,24 @@
  *
  */
 
-width = 500;
-height = 200;
-radius = 25;
+function refreshCanvas1(){
+  clearElem(canvas1);
 
-nfa = [nfa1, nfa2, nfa3];
-nfaIndex = 0
-
-inputIndex = 0
-inputPointer = -1
-
-nodes = []
-edges = []
-
-path_state = "acc";
-
-function refreshCanvas(){
-  clearElem(canvas);
-
-  curr = ""
+  nfa_curr = ""
   if(inputPointer != -1){
     // console.log("before", inputPointer, curr);
     // console.log(nfa[nfaIndex]["input"]);
     if(path_state == "acc"){
-      curr = nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
+      nfa_curr = nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
     }else{
-      curr = nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
+      nfa_curr = nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
     }
     // console.log("after", inputPointer, curr);
   }
-  res = displayCanvas(canvas, nfa[nfaIndex], inputPointer, curr);
+  nfa_res = displayCanvas(canvas1, nfa[nfaIndex], inputPointer, nfa_curr);
 
-  nodes = res[0]
-  edges = res[1]
+  nfa_nodes = nfa_res[0]
+  nfa_edges = nfa_res[1]
 }
 
 function resetInput(){
@@ -61,20 +46,20 @@ function refreshInput(){
 }
 
 window.addEventListener('load', function(e){
-  canvas = document.getElementById("canvas1");
+  canvas1 = document.getElementById("canvas1");
 
   refreshInput();
-  refreshCanvas();
+  refreshCanvas1();
 
   // Event listener for changing NFA
   changeNFA = document.getElementById("change_nfa");
   changeNFA.addEventListener("click", function(e){
-    clearElem(canvas);
+    clearElem(canvas1);
     nfaIndex = nfaIndex + 1;
     if(nfaIndex >= nfa.length){
       nfaIndex = 0;
     }
-    refreshCanvas();
+    refreshCanvas1();
     resetInput();
   });
 
@@ -96,7 +81,7 @@ window.addEventListener('load', function(e){
     if(inputPointer != nfa[nfaIndex]["input"][inputIndex]["string"].length){
       inputPointer = inputPointer + 1;
       refreshInput();
-      refreshCanvas();
+      refreshCanvas1();
     }
   });
 
@@ -106,7 +91,7 @@ window.addEventListener('load', function(e){
     if(inputPointer != -1){
       inputPointer = inputPointer - 1;
       refreshInput();
-      refreshCanvas();
+      refreshCanvas1();
     }
   });
 
@@ -120,7 +105,7 @@ window.addEventListener('load', function(e){
     }
     inputPointer = -1;
     refreshInput();
-    refreshCanvas();
+    refreshCanvas1();
   });
 
 });

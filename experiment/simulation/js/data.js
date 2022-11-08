@@ -124,6 +124,8 @@ const nfa2 = {
   ]
 }
 
+const dfa2 = {}
+
 const nfa3 = {
   "vertices": [
     {"text": "A", "type": "start"},
@@ -158,3 +160,5 @@ const nfa3 = {
     }
   ]
 }
+
+const dfa3 = {}
