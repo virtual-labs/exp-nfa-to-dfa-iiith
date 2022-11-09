@@ -122,69 +122,58 @@ const dfa2 = {
   ]
 }
 
-// const nfa2 = {
+// const nfa3 = {
 //   "vertices": [
-//     {"text": "A", "type": "start"},
-//     {"text": "B", "type": "none"},
-//     {"text": "C", "type": "accept"}
+//
 //   ],
 //   "edges": [
-//     {"start": "A", "end": "A", "text": "0,1", "type": "self"},
-//     {"start": "A", "end": "B", "text": "1", "type": "forward"},
-//     {"start": "B", "end": "C", "text": "0,1", "type": "forward"}
+//
 //   ],
 //   "input": [
 //     {
-//       "string": "11010",
-//       "states": ["A", "A", "A", "A", "B", "C"],
-//       "reject_path": ["A", "A", "A", "A", "A", "A"]
+//       "string": "1000",
+//       "states": ["A"],
+//       "reject_path": ["A"]
 //     },
 //     {
-//       "string": "1111",
-//       "states": ["A", "A", "A", "B", "C"],
-//       "reject_path": ["A", "A", "A", "A", "B"]
+//       "string": "00010",
+//       "states": ["A"],
+//       "reject_path": ["A"]
 //     },
 //     {
-//       "string": "0011011",
-//       "states": ["A", "A", "A", "A", "A", "A", "B", "C"],
-//       "reject_path": ["A", "A", "A", "A", "A", "A", "A", "B"]
+//       "string": "",
+//       "states": ["A"],
+//       "reject_path": ["A"]
 //     }
 //   ]
 // }
-
-const nfa3 = {
-  "vertices": [
-    {"text": "A", "type": "start"},
-    {"text": "B", "type": "none"},
-    {"text": "C", "type": "none"},
-    {"text": "D", "type": "none"},
-    {"text": "E", "type": "accept"}
-  ],
-  "edges": [
-    {"start": "A", "end": "B", "text": "1", "type": "forward"},
-    {"start": "B", "end": "B", "text": "0,1", "type": "self"},
-    {"start": "B", "end": "C", "text": "0", "type": "forward"},
-    {"start": "C", "end": "D", "text": "0", "type": "forward"},
-    {"start": "D", "end": "D", "text": "0,1", "type": "self"},
-    {"start": "D", "end": "E", "text": "1", "type": "forward"}
-  ],
-  "input": [
-    {
-      "string": "1001",
-      "states": ["A", "B", "C", "D", "E"],
-      "reject_path": ["A", "B", "C", "D", "D"]
-    },
-    {
-      "string": "100011",
-      "states": ["A", "B", "B", "C", "D", "D", "E"],
-      "reject_path": ["A", "B", "B", "C", "D", "D", "D"]
-    },
-    {
-      "string": "11001",
-      "states": ["A", "B", "B", "C", "D", "E"],
-      "reject_path": ["A", "B", "B", "C", "D", "D"]
-    }
-  ]
-}
-
-const dfa3 = {}
+//
+// const dfa3 = {
+//   "vertices": [
+//     {"text": "a", "type": "start"},
+//     {"text": "b", "type": "none"},
+//     {"text": "c", "type": "none"},
+//     {"text": "d", "type": "accept"}
+//   ],
+//   "edges": [
+//     {"start": "a", "end": "a", "text": "1", "type": "self"},
+//     {"start": "a", "end": "b", "text": "0", "type": "forward"},
+//     {"start": "b", "end": "c", "text": "0", "type": "forward"},
+//     {"start": "c", "end": "d", "text": "0", "type": "forward"},
+//     {"start": "d", "end": "d", "text": "0,1", "type": "self"}
+//   ],
+//   "input": [
+//     {
+//       "string": "1000",
+//       "states": ["a", "a", "b", "c", "d"]
+//     },
+//     {
+//       "string": "00010",
+//       "states": ["a", "b", "c", "d", "d", "d"]
+//     },
+//     {
+//       "string": "0001",
+//       "states": ["a", "b", "c", "d", "d"]
+//     }
+//   ]
+// }
