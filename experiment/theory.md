@@ -19,8 +19,57 @@ We shall now show that given any non-deterministic finite automaton that accepts
 
 > How does one encode the notion of "multiple copies of a finite state machine running in parallel"?
 
-One way to encode this is through the powerset construction. Let us illustrate that using an example.
+One way to encode this is through the power-set construction. Let us illustrate that using an example.
 
 ![Example of a NFA that we intend to convert to a DFA](images/NFAtoDFAExample1.png)
+
+Now let us stare at the transition table of this NFA $N_1 = (Q = \{q_1, q_2, q_3\}, \Sigma = \{0,1\}, \delta, q_1, \{q_1\})$ and try to construct a DFA $D_1 = (Q', \Sigma, \delta', S, F)$ that accepts the same language as $N_1$.
+
+|       | $0$            | $1$   | $\varepsilon$ |
+|:------|:--------------:|:-----:|--------------:|
+| $q_1$ |                | $q_2$ |         $q_3$ |
+| $q_2$ | $\{q_2, q_3\}$ | $q_3$ |               |
+| $q_3$ | $q_1$          |       |               |
+
+
+<!-- 
+Now let us rewrite this transition table as follows.
+
+|           | $0$            | $1$       | $\varepsilon$ |
+|:----------|:--------------:|:---------:|--------------:|
+| $\{q_1\}$ |                | $\{q_2\}$ |     $\{q_3\}$ |
+| $\{q_2\}$ | $\{q_2, q_3\}$ | $\{q_3\}$ |               |
+| $\{q_3\}$ | $\{q_1\}$      |           |               |
+--->
+
+Note that we need to keep track of the transitions across multiple copies of the machine, deterministically. Towards this the following idea could work.
+
+> Can we create a new finite state automaton whose states are labeled by subsets of $\{q_1, q_2, q_3\}$.
+
+Let $Q'$ denote the power-set of $\{q_1, q_2, q_3\}$. Let $\Sigma'$ be the same as $\Sigma = \{0,1\}$. Now we shall the define the transitions as follows.
+
+For a subset $R$ of $\{q_1, q_2, q_3\}$ and a letter $a$ of the alphabet, we could possibly define the transition function $\delta'$ as follows. 
+
+$$\delta'(R,a) = \{q \in Q \mid q\in \cup_{r\in R}\delta(r,a) \}.$$
+
+For example, $\delta'(\{q_2\}, 0) = \{q_2, q_3\}$. But this does not take care of $\varepsilon$-transitions. Recall that $\varepsilon$-transitions create copies of the machine without reading a letter of the input. For any subset $R$, let $E(R)$ be defined as follows.
+
+$$E(R) = R\cup \{\text{states $q$ that are reachable from some $r\in R$ via one or more $\varepsilon$ transitions}\}.$$
+
+Thus, we modify the above definition of $\delta'(R,a)$ as follows.
+
+$$\delta'(R,a) = \{q \in Q \mid q\in \cup_{r\in R}E(\delta(r,a)) \}.$$
+
+Now the start state of the machine 
+
+
+
+
+
+
+
+
+
+
 
 
