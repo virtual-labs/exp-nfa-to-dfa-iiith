@@ -66,6 +66,17 @@ We show this pictorially as follows.
 
 ![Equivalent DFA to the NFA $N_1$](images/EquivalentDFA.png)
 
+We can also remove the states $\{1\}$ and $\{1,2\}$ as they do not have any incoming edges to simplify the DFA.
+
+> Is power-set construction the only way to construct a DFA given an NFA?
+
+No, there are more conversion algorithms. [Kleene's algorithm](https://en.wikipedia.org/wiki/Kleene%27s_algorithm) is yet another way to convert a NFA into a DFA.
+
+> Given a NFA over $k$ states, the DFA constructed through the power-set construction could have $2^k$ many states.
+
+*Things to ponder:*
+1. Given a NFA over $k$ states, can we construct a DFA with much fewer states than $2^k$.
+2. Are there any languages for which there is a NFA with *few* states and for every equivalent DFA has a *lot* of states.
 
 ## Related topics
 1. [Language acceptance by Deterministic Finite Automata](https://virtual-labs.github.io/exp-determinstic-finite-automaton-iiith/)
