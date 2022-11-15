@@ -52,7 +52,7 @@ For a subset $R$ of $\{q_1, q_2, q_3\}$ and a letter $a$ of the alphabet, we cou
 
 $$\delta'(R,a) = \{q \in Q \mid q\in \cup_{r\in R}\delta(r,a) \}.$$
 
-For example, $\delta'(\{q_2\}, 0) = \{q_2, q_3\}$. But this does not take care of $\varepsilon$-transitions. Recall that $\varepsilon$-transitions create copies of the machine without reading a letter of the input. For any subset $R$, let $E(R)$ be defined as follows.
+For example, $\delta'(\{q_2\}, 0) = \{q_2, q_3\}$, $\delta'(\{q_1\}, 0) = \emptyset$, and so on. But this does not take care of $\varepsilon$-transitions. Recall that $\varepsilon$-transitions create copies of the machine without reading a letter of the input. For any subset $R$, let $E(R)$ be defined as follows.
 
 $$E(R) = R\cup \{\text{states $q$ that are reachable from some $r\in R$ via one or more $\varepsilon$ transitions}\}.$$
 
@@ -60,8 +60,17 @@ Thus, we modify the above definition of $\delta'(R,a)$ as follows.
 
 $$\delta'(R,a) = \{q \in Q \mid q\in \cup_{r\in R}E(\delta(r,a)) \}.$$
 
-Now the start state of the machine 
+Now the start state of the machine $D_1$ is the set of all the states that are reachable from $q_1$ (the start state of $N_1$) via $\varepsilon$ transitions. That is, $E({q_1})$. Final states $F'$ of the machine $D_1$ are going to be the set of states in $Q'$ that contain an accepting state of $N_1$.
 
+We show this pictorially as follows.
+
+![Equivalent DFA to the NFA $N_1$](images/EquivalentDFA.png)
+
+
+## Related topics
+1. [Language acceptance by Deterministic Finite Automata](https://virtual-labs.github.io/exp-determinstic-finite-automaton-iiith/)
+2. [Language acceptance by Non-Deterministic Finite Automata](https://virtual-labs.github.io/exp-non-determinstic-finite-automaton-iiith/)
+3. [Converting a Regular Expression to NFA](https://virtual-labs.github.io/exp-converting-regular-expression-iiith/)
 
 
 
