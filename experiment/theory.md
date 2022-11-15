@@ -19,4 +19,8 @@ We shall now show that given any non-deterministic finite automaton that accepts
 
 > How does one encode the notion of "multiple copies of a finite state machine running in parallel"?
 
-One way to encode this is through the powerset construction.
+One way to encode this is through the powerset construction. Let us illustrate that using an example.
+
+![Example of a NFA that we intend to convert to a DFA](images/NFAtoDFAExample1.png)
+
+
