@@ -83,6 +83,42 @@ window.addEventListener('load', function(e){
         str += "moved to start state";
       }
       addToStack2(str);
+
+      // Display popup at end
+      if(inputPointer==dfa[dfaIndex]["input"][inputIndex]["string"].length){
+
+        nfaComputationStatus = "Rejected";
+        dfaComputationStatus = "Rejected";
+
+        for(itr=0;itr<nfa[nfaIndex]["vertices"].length;++itr){
+
+          if(path_state=="acc"){
+            if(nfa[nfaIndex]["vertices"][itr]["text"] == nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer]){
+              if(nfa[nfaIndex]["vertices"][itr]["type"] == "accept"){
+                nfaComputationStatus = "Accepted";
+              }
+              break;
+            }
+          }else{
+            if(nfa[nfaIndex]["vertices"][itr]["text"] == nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer]){
+              if(nfa[nfaIndex]["vertices"][itr]["type"] == "accept"){
+                nfaComputationStatus = "Accepted";
+              }
+              break;
+            }
+          }
+
+        }
+        for(itr=0;itr<dfa[dfaIndex]["vertices"].length;++itr){
+          if(dfa[dfaIndex]["vertices"][itr]["text"] == dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer]){
+            if(dfa[dfaIndex]["vertices"][itr]["type"] == "accept"){
+              dfaComputationStatus = "Accepted";
+            }
+            break;
+          }
+        }
+        swal("Input string was "+nfaComputationStatus+" by NFA and "+dfaComputationStatus+" by DFA");
+      }
     }
   });
 
