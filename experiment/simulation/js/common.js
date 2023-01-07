@@ -22,7 +22,7 @@ window.addEventListener('load', function(e){
       nfaIndex = 0;
     }
     if(dfaIndex >= dfa.length){
-      nfaIndex = 0;
+      dfaIndex = 0;
     }
     refreshCanvas1();
     refreshCanvas2();
