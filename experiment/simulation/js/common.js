@@ -10,6 +10,8 @@ window.addEventListener('load', function(e){
   refreshInput();
   refreshCanvas1();
   refreshCanvas2();
+  resetStack1();
+  resetStack2();
 
   // Event listener for changing FA
   changeFA = document.getElementById("change_fa");
@@ -22,11 +24,13 @@ window.addEventListener('load', function(e){
       nfaIndex = 0;
     }
     if(dfaIndex >= dfa.length){
-      nfaIndex = 0;
+      dfaIndex = 0;
     }
     refreshCanvas1();
     refreshCanvas2();
     resetInput();
+    resetStack1();
+    resetStack2();
   });
 
   // Event listener for changing input
@@ -40,6 +44,8 @@ window.addEventListener('load', function(e){
     refreshInput();
     refreshCanvas1();
     refreshCanvas2();
+    resetStack1();
+    resetStack2();
   });
 
   // Event listener for next
@@ -50,6 +56,69 @@ window.addEventListener('load', function(e){
       refreshInput();
       refreshCanvas1();
       refreshCanvas2();
+
+      str = "";
+      if(inputPointer!=0){
+        str += "read character "+nfa[nfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        if(path_state=="acc"){
+          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
+        }else{
+          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer-1];
+          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
+        }
+      }
+      if(inputPointer==0){
+        str += "moved to start state";
+      }
+      addToStack1(str);
+
+      str = "";
+      if(inputPointer!=0){
+        str += "read character "+dfa[dfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        str += " and moved from state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+        str += " to state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer];
+      }
+      if(inputPointer==0){
+        str += "moved to start state";
+      }
+      addToStack2(str);
+
+      // Display popup at end
+      if(inputPointer==dfa[dfaIndex]["input"][inputIndex]["string"].length){
+
+        nfaComputationStatus = "Rejected";
+        dfaComputationStatus = "Rejected";
+
+        for(itr=0;itr<nfa[nfaIndex]["vertices"].length;++itr){
+
+          if(path_state=="acc"){
+            if(nfa[nfaIndex]["vertices"][itr]["text"] == nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer]){
+              if(nfa[nfaIndex]["vertices"][itr]["type"] == "accept"){
+                nfaComputationStatus = "Accepted";
+              }
+              break;
+            }
+          }else{
+            if(nfa[nfaIndex]["vertices"][itr]["text"] == nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer]){
+              if(nfa[nfaIndex]["vertices"][itr]["type"] == "accept"){
+                nfaComputationStatus = "Accepted";
+              }
+              break;
+            }
+          }
+
+        }
+        for(itr=0;itr<dfa[dfaIndex]["vertices"].length;++itr){
+          if(dfa[dfaIndex]["vertices"][itr]["text"] == dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer]){
+            if(dfa[dfaIndex]["vertices"][itr]["type"] == "accept"){
+              dfaComputationStatus = "Accepted";
+            }
+            break;
+          }
+        }
+        swal("Input string was "+nfaComputationStatus+" by NFA and "+dfaComputationStatus+" by DFA");
+      }
     }
   });
 
@@ -61,6 +130,8 @@ window.addEventListener('load', function(e){
       refreshInput();
       refreshCanvas1();
       refreshCanvas2();
+      removeFromStack1();
+      removeFromStack2();
     }
   });
 
@@ -75,5 +146,7 @@ window.addEventListener('load', function(e){
     refreshInput();
     refreshCanvas1();
     refreshCanvas2();
+    resetStack1();
+    resetStack2();
   });
 });

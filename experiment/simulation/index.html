@@ -12,10 +12,11 @@
 					<div id="instruction-title" class="v-collapsible is-size-5">Instructions<br>Simulating a non-deterministic finite automata</div>
 					<div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
 						<ul style="list-style: disc;">
-							<li> <strong>Change NFA</strong> button switches to a different NFA</li>
-              <li><strong>Change input</strong> changes the input given to the NFA</li>
-              <li><strong>Next</strong> displays the next step in NFA simulation</li>
-              <li><strong>Prev</strong> displays the previous step in NFA simulation</li>
+              <li>The left FA is an NFA and the right one is a DFA</li>
+							<li> <strong>Change FA</strong> button switches to a different FA</li>
+              <li><strong>Change input</strong> changes the input given to the FA</li>
+              <li><strong>Next</strong> displays the next step in FA simulation</li>
+              <li><strong>Prev</strong> displays the previous step in FA simulation</li>
               <li>Toggle <strong>Reject path</strong> to switch between accepting paths and rejecting paths</li>
 						</ul>
 					</div>
@@ -39,6 +40,24 @@
   				</div>
   			</div>
   		</div> -->
+      <div class="column is-centered is-12-desktop is-12-tablet is-12-mobile">
+        <button id="change_fa" type="button" name="button" class="v-button" style="margin-bottom: 5px;">
+          change FA
+        </button>
+        <button id="change_input" type="button" name="button" class="v-button">
+          change input
+        </button>
+        <button id="next" type="button" name="button" class="v-button">
+          Next
+        </button>
+        <button id="prev" type="button" name="button" class="v-button">
+          Previous
+        </button>
+        <div class="">
+          <input type="checkbox" id="path_switch" />
+          <label for="path_switch">Reject path</label>
+        </div>
+      </div>
       <div id="input_container" class="is-size-1 is-centered is-flex-direction-row is-align-content-center">
       </div>
       <div class="columns is-centered is-flex-direction-row is-flex-wrap-wrap is-align-content-start">
@@ -49,6 +68,11 @@
                 <svg id="canvas1" width='600' height='200' xmlns="http://www.w3.org/2000/svg">
                 </svg>
               </div>
+              <div id="stack_container_1" style="overflow: auto;">
+              <ul id="stack_list_1">
+
+              </ul>
+            </div>
     				</div>
     			</div>
     		</div>
@@ -59,6 +83,11 @@
                 <svg id="canvas2" width='600' height='200' xmlns="http://www.w3.org/2000/svg">
                 </svg>
               </div>
+              <div id="stack_container_2" style="overflow: auto;">
+              <ul id="stack_list_2">
+
+              </ul>
+            </div>
     				</div>
     			</div>
     		</div>
@@ -81,7 +110,7 @@
   				</div>
   			</div>
   		</div> -->
-      <div class="column is-centered is-12-desktop is-12-tablet is-12-mobile">
+      <!-- <div class="column is-centered is-12-desktop is-12-tablet is-12-mobile">
         <button id="change_fa" type="button" name="button" class="v-button" style="margin-bottom: 5px;">
           change FA
         </button>
@@ -98,10 +127,11 @@
           <input type="checkbox" id="path_switch" />
           <label for="path_switch">Reject path</label>
         </div>
-      </div>
+      </div> -->
   	</div>
 
     <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./js/data.js"></script>
     <script src="./js/global.js"></script>
     <script src="./js/helper.js"></script>
