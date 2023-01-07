@@ -10,6 +10,8 @@ window.addEventListener('load', function(e){
   refreshInput();
   refreshCanvas1();
   refreshCanvas2();
+  resetStack1();
+  resetStack2();
 
   // Event listener for changing FA
   changeFA = document.getElementById("change_fa");
@@ -27,6 +29,8 @@ window.addEventListener('load', function(e){
     refreshCanvas1();
     refreshCanvas2();
     resetInput();
+    resetStack1();
+    resetStack2();
   });
 
   // Event listener for changing input
@@ -40,6 +44,8 @@ window.addEventListener('load', function(e){
     refreshInput();
     refreshCanvas1();
     refreshCanvas2();
+    resetStack1();
+    resetStack2();
   });
 
   // Event listener for next
@@ -50,6 +56,33 @@ window.addEventListener('load', function(e){
       refreshInput();
       refreshCanvas1();
       refreshCanvas2();
+
+      str = "";
+      if(inputPointer!=0){
+        str += "read character "+nfa[nfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        if(path_state=="acc"){
+          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
+        }else{
+          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer-1];
+          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
+        }
+      }
+      if(inputPointer==0){
+        str += "moved to start state";
+      }
+      addToStack1(str);
+
+      str = "";
+      if(inputPointer!=0){
+        str += "read character "+dfa[dfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        str += " and moved from state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+        str += " to state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer];
+      }
+      if(inputPointer==0){
+        str += "moved to start state";
+      }
+      addToStack2(str);
     }
   });
 
@@ -61,6 +94,8 @@ window.addEventListener('load', function(e){
       refreshInput();
       refreshCanvas1();
       refreshCanvas2();
+      removeFromStack1();
+      removeFromStack2();
     }
   });
 
@@ -75,5 +110,7 @@ window.addEventListener('load', function(e){
     refreshInput();
     refreshCanvas1();
     refreshCanvas2();
+    resetStack1();
+    resetStack2();
   });
 });

@@ -45,67 +45,89 @@ function refreshInput(){
   }
 }
 
-window.addEventListener('load', function(e){
-  canvas1 = document.getElementById("canvas1");
+function resetStack1(){
+  stack = document.getElementById("stack_list_1");
+  clearElem(stack);
+}
 
-  refreshInput();
-  refreshCanvas1();
+function addToStack1(str){
+  stack = document.getElementById("stack_list_1");
+  listElem = newElement("li", []);
+  textNode = document.createTextNode(str);
+  listElem.appendChild(textNode)
+  stack.appendChild(listElem);
 
-  // Event listener for changing NFA
-  // changeNFA = document.getElementById("change_nfa");
-  // changeNFA.addEventListener("click", function(e){
-  //   clearElem(canvas1);
-  //   nfaIndex = nfaIndex + 1;
-  //   if(nfaIndex >= nfa.length){
-  //     nfaIndex = 0;
-  //   }
-  //   refreshCanvas1();
-  //   resetInput();
-  // });
+}
 
-  // Event listener for changing input
-  // changeInput = document.getElementById("change_input");
-  // changeInput.addEventListener("click", function(e){
-  //   inputIndex = inputIndex + 1;
-  //   if(inputIndex >= nfa[nfaIndex]["input"].length){
-  //     inputIndex = 0;
-  //   }
-  //   inputPointer = -1;
-  //   refreshInput();
-  //   refreshCanvas1();
-  // });
+function removeFromStack1(){
+  stack = document.getElementById("stack_list_1");
+  if(stack.firstChild){
+    stack.removeChild(stack.lastChild);
+  }
+}
 
-  // Event listener for next
-  // next = document.getElementById("next");
-  // next.addEventListener("click", function(e){
-  //   if(inputPointer != nfa[nfaIndex]["input"][inputIndex]["string"].length){
-  //     inputPointer = inputPointer + 1;
-  //     refreshInput();
-  //     refreshCanvas1();
-  //   }
-  // });
-
-  // Event listener for prev
-  // prev = document.getElementById("prev");
-  // prev.addEventListener("click", function(e){
-  //   if(inputPointer != -1){
-  //     inputPointer = inputPointer - 1;
-  //     refreshInput();
-  //     refreshCanvas1();
-  //   }
-  // });
-
-  // Event linstener for switch
-  // path_switch = document.getElementById("path_switch");
-  // path_switch.addEventListener("change", function(e){
-  //   if(path_state == "acc"){
-  //     path_state = "rej";
-  //   }else{
-  //     path_state = "acc";
-  //   }
-  //   inputPointer = -1;
-  //   refreshInput();
-  //   refreshCanvas1();
-  // });
-
-});
+// window.addEventListener('load', function(e){
+//   canvas1 = document.getElementById("canvas1");
+//
+//   refreshInput();
+//   refreshCanvas1();
+//   resetStack1();
+//
+//   // Event listener for changing NFA
+//   // changeNFA = document.getElementById("change_nfa");
+//   // changeNFA.addEventListener("click", function(e){
+//   //   clearElem(canvas1);
+//   //   nfaIndex = nfaIndex + 1;
+//   //   if(nfaIndex >= nfa.length){
+//   //     nfaIndex = 0;
+//   //   }
+//   //   refreshCanvas1();
+//   //   resetInput();
+//   // });
+//
+//   // Event listener for changing input
+//   // changeInput = document.getElementById("change_input");
+//   // changeInput.addEventListener("click", function(e){
+//   //   inputIndex = inputIndex + 1;
+//   //   if(inputIndex >= nfa[nfaIndex]["input"].length){
+//   //     inputIndex = 0;
+//   //   }
+//   //   inputPointer = -1;
+//   //   refreshInput();
+//   //   refreshCanvas1();
+//   // });
+//
+//   // Event listener for next
+//   // next = document.getElementById("next");
+//   // next.addEventListener("click", function(e){
+//   //   if(inputPointer != nfa[nfaIndex]["input"][inputIndex]["string"].length){
+//   //     inputPointer = inputPointer + 1;
+//   //     refreshInput();
+//   //     refreshCanvas1();
+//   //   }
+//   // });
+//
+//   // Event listener for prev
+//   // prev = document.getElementById("prev");
+//   // prev.addEventListener("click", function(e){
+//   //   if(inputPointer != -1){
+//   //     inputPointer = inputPointer - 1;
+//   //     refreshInput();
+//   //     refreshCanvas1();
+//   //   }
+//   // });
+//
+//   // Event linstener for switch
+//   // path_switch = document.getElementById("path_switch");
+//   // path_switch.addEventListener("change", function(e){
+//   //   if(path_state == "acc"){
+//   //     path_state = "rej";
+//   //   }else{
+//   //     path_state = "acc";
+//   //   }
+//   //   inputPointer = -1;
+//   //   refreshInput();
+//   //   refreshCanvas1();
+//   // });
+//
+// });
