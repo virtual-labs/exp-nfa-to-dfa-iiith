@@ -8,15 +8,20 @@ function refreshCanvas1(){
 
   nfa_curr = ""
   if(inputPointer != -1){
-    // console.log("before", inputPointer, curr);
-    // console.log(nfa[nfaIndex]["input"]);
     if(path_state == "acc"){
       nfa_curr = nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
     }else{
       nfa_curr = nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
     }
-    // console.log("after", inputPointer, curr);
   }
+
+  // NFADescriptionContainer = document.getElementById("NFA_description_container");
+  // clearElem(NFADescriptionContainer);
+  // span = newElement("font", [["id", "NFA_description"], ["color", "brown"], ["size", "5"]]);
+  // text = document.createTextNode(nfa[nfaIndex]["description"]);
+  // NFADescriptionContainer.appendChild(span);
+  // span.appendChild(text);
+
   nfa_res = displayCanvas(canvas1, nfa[nfaIndex], inputPointer, nfa_curr);
 
   nfa_nodes = nfa_res[0]
@@ -55,14 +60,26 @@ function addToStack1(str){
   listElem = newElement("li", []);
   textNode = document.createTextNode(str);
   listElem.appendChild(textNode)
-  stack.appendChild(listElem);
+  // stack.appendChild(listElem);
+  // Prepend the new list item at the top of the stack (insert before the first child)
+  if (stack.firstChild) {
+    stack.firstChild.style.fontWeight = "normal";
+    stack.insertBefore(listElem, stack.firstChild);
+  } else {
+    stack.appendChild(listElem);
+  }
+  // Make the top element bold and blue
+  stack.firstChild.style.fontWeight = "bold";
 
 }
 
 function removeFromStack1(){
   stack = document.getElementById("stack_list_1");
   if(stack.firstChild){
-    stack.removeChild(stack.lastChild);
+    stack.removeChild(stack.firstChild);
+    if (stack.firstChild) {
+      stack.firstChild.style.fontWeight = "bold";
+    }
   }
 }
 
