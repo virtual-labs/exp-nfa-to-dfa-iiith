@@ -1,39 +1,149 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "version": 2.0,
+    "questions": [
+	{
+	    "question": "A DFA is called deterministic because:",
+	    "answers": {
+		"a": "It allows multiple transitions for the same input symbol",
+		"b": "It has exactly one transition for each input symbol from every state",
+		"c": "It can use epsilon transitions",
+		"d": "It can recognize context-free languages"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "Which of the following automata has exactly one initial state?",
+	    "answers": {
+		"a": "DFA only",
+		"b": "NFA only",
+		"c": "Both DFA and NFA",
+		"d": "Neither DFA nor NFA"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "In a DFA, a final state is:",
+	    "answers": {
+		"a": "The first state",
+		"b": "A state with no outgoing transitions",
+		"c": "A state where the input string is accepted",
+		"d": "A state with epsilon transitions"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "A language is regular if it can be represented by:",
+	    "answers": {
+		"a": "A Turing machine",
+		"b": "A DFA or an NFA",
+		"c": "A context-free grammar",
+		"d": "A stack-based automaton"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "What is the purpose of a transition function in a DFA?",
+	    "answers": {
+		"a": "To specify the initial state",
+		"b": "To define the set of final states",
+		"c": "To determine the next state based on current state and input symbol",
+		"d": "To allow epsilon transitions"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	}
+	{
+	    "question": "Which of the following statements is true regarding the equivalence of DFAs and NFAs?",
+	    "answers": {
+		"a": "Every DFA has an equivalent NFA, but not every NFA has an equivalent DFA",
+		"b": "Every NFA has an equivalent DFA, but the DFA may have exponentially more states",
+		"c": "DFAs and NFAs recognize different sets of languages",
+		"d": "NFAs can recognize some languages that DFAs cannot"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "When converting an NFA to a DFA, the resulting DFA:",
+	    "answers": {
+		"a": "Always has the same number of states",
+		"b": "May have more states, at most equal to 2^n where n is the number of NFA states",
+		"c": "Requires less memory for state representation",
+		"d": "May recognize a different language"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "advanced"
+	},
+	{
+	    "question": "Why are DFAs considered equivalent in power to NFAs?",
+	    "answers": {
+		"a": "Because DFAs are faster than NFAs",
+		"b": "Because every NFA can be transformed into a DFA that recognizes the same language",
+		"c": "Because NFAs can only recognize a subset of the languages recognized by DFAs",
+		"d": "Because DFAs allow epsilon transitions"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "Which of the following is a common consequence of converting an NFA to its equivalent DFA?",
+	    "answers": {
+		"a": "The DFA has fewer states than the NFA",
+		"b": "The DFA runs slower than the NFA",
+		"c": "The DFA may have exponentially more states than the NFA",
+		"d": "The DFA allows epsilon transitions, unlike the NFA"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "advanced"
+	},
+	{
+	    "question": "In terms of language recognition, what is true for both DFAs and NFAs?",
+	    "answers": {
+		"a": "They can recognize all regular and some non-regular languages",
+		"b": "They can only recognize context-free languages",
+		"c": "They recognize exactly the same set of regular languages",
+		"d": "They are equivalent to context-sensitive grammars"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "The subset construction method is used to:",
+	    "answers": {
+		"a": "Minimize the number of states in a DFA",
+		"b": "Convert a regular expression to a DFA",
+		"c": "Convert an NFA to an equivalent DFA",
+		"d": "Create an NFA from a context-free grammar"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "Which of the following best describes the relationship between DFAs and NFAs regarding computational power?",
+	    "answers": {
+		"a": "NFAs are computationally more powerful than DFAs",
+		"b": "DFAs and NFAs are equally powerful but may differ in efficiency",
+		"c": "DFAs are more efficient but less powerful than NFAs",
+		"d": "NFAs can simulate a Turing machine, but DFAs cannot"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "Which operation is typically used when constructing a DFA from an NFA to handle multiple possible states?",
+	    "answers": {
+		"a": "Union of all possible transitions",
+		"b": "Intersection of states",
+		"c": "Subset construction by grouping states",
+		"d": "Direct concatenation of state transitions"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "advanced"
+	}
+    ]
+
 }
