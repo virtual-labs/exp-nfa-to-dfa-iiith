@@ -51,66 +51,22 @@ function addToStack2(str){
   listElem = newElement("li", []);
   textNode = document.createTextNode(str);
   listElem.appendChild(textNode)
-  stack.appendChild(listElem);
+  if (stack.firstChild) {
+    stack.firstChild.style.fontWeight = "normal";
+    stack.insertBefore(listElem, stack.firstChild);
+  } else {
+    stack.appendChild(listElem);
+  }
+  stack.firstChild.style.fontWeight = "bold";
 
 }
 
 function removeFromStack2(){
   stack = document.getElementById("stack_list_2");
   if(stack.firstChild){
-    stack.removeChild(stack.lastChild);
+    stack.removeChild(stack.firstChild);
+    if (stack.firstChild) {
+      stack.firstChild.style.fontWeight = "bold";
+    }
   }
 }
-
-// window.addEventListener('load', function(e){
-//   canvas2 = document.getElementById("canvas2");
-//
-//   refreshInput();
-//   refreshCanvas2();
-//   resetStack2();
-//
-//   // Event listener for changing DFA
-//   // changeDFA = document.getElementById("change_dfa");
-//   // changeDFA.addEventListener("click", function(e){
-//   //   clearElem(canvas2);
-//   //   dfaIndex = dfaIndex + 1;
-//   //   if(dfaIndex >= dfa.length){
-//   //     dfaIndex = 0;
-//   //   }
-//   //   refreshCanvas2();
-//   //   resetInput();
-//   // });
-//
-//   // Event listener for changing input
-//   // changeInput = document.getElementById("change_input");
-//   // changeInput.addEventListener("click", function(e){
-//   //   inputIndex = inputIndex + 1;
-//   //   if(inputIndex >= dfa[dfaIndex]["input"].length){
-//   //     inputIndex = 0;
-//   //   }
-//   //   inputPointer = -1;
-//   //   refreshInput();
-//   //   refreshCanvas2();
-//   // });
-//
-//   // Event listener for next
-//   // next = document.getElementById("next");
-//   // next.addEventListener("click", function(e){
-//   //   if(inputPointer != dfa[dfaIndex]["input"][inputIndex]["string"].length){
-//   //     inputPointer = inputPointer + 1;
-//   //     refreshInput();
-//   //     refreshCanvas2();
-//   //   }
-//   // });
-//
-//   // Event listener for prev
-//   // prev = document.getElementById("prev");
-//   // prev.addEventListener("click", function(e){
-//   //   if(inputPointer != -1){
-//   //     inputPointer = inputPointer - 1;
-//   //     refreshInput();
-//   //     refreshCanvas2();
-//   //   }
-//   // });
-//
-// });

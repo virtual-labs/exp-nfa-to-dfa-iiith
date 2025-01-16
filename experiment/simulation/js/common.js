@@ -59,28 +59,28 @@ window.addEventListener('load', function(e){
 
       str = "";
       if(inputPointer!=0){
-        str += "read character "+nfa[nfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        str += "Read character "+nfa[nfaIndex]["input"][inputIndex]["string"][inputPointer-1];
         if(path_state=="acc"){
-          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer-1];
-          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
+          str += " and moved from State "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+          str += " to State "+nfa[nfaIndex]["input"][inputIndex]["states"][inputPointer];
         }else{
-          str += " and moved from state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer-1];
-          str += " to state "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
+          str += " and moved from State "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer-1];
+          str += " to State "+nfa[nfaIndex]["input"][inputIndex]["reject_path"][inputPointer];
         }
       }
       if(inputPointer==0){
-        str += "moved to start state";
+        str += "Moved to Start State";
       }
       addToStack1(str);
 
       str = "";
       if(inputPointer!=0){
-        str += "read character "+dfa[dfaIndex]["input"][inputIndex]["string"][inputPointer-1];
-        str += " and moved from state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer-1];
-        str += " to state "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer];
+        str += "Read character "+dfa[dfaIndex]["input"][inputIndex]["string"][inputPointer-1];
+        str += " and moved from State "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer-1];
+        str += " to State "+dfa[dfaIndex]["input"][inputIndex]["states"][inputPointer];
       }
       if(inputPointer==0){
-        str += "moved to start state";
+        str += "Moved to Start State";
       }
       addToStack2(str);
 

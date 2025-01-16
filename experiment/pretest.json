@@ -1,39 +1,115 @@
 {
-  "version": 2.0,
-  "questions": [
-    {
-      "question": "This is a Sample Question 1?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
-    }
-  ]
+    "version": 2.0,
+    "questions": [
+	{
+	    "question": "Which of the following statements is true for DFA and NFA?",
+	    "answers": {
+		"a": "DFA can have epsilon transitions, NFA cannot",
+		"b": "Every NFA has an equivalent DFA",
+		"c": "NFA is more powerful than DFA",
+		"d": "DFA is more powerful than NFA"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "In a DFA, for each state, there are:",
+	    "answers": {
+		"a": "No transitions",
+		"b": "Exactly one transition for each symbol in the alphabet",
+		"c": "Multiple transitions for the same symbol",
+		"d": "At least one epsilon transition"
+	    },
+	    "correctAnswer": "b",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "Which of the following is NOT a valid property of DFA?",
+	    "answers": {
+		"a": "It has a single initial state",
+		"b": "It can have multiple final states",
+		"c": "It allows epsilon transitions",
+		"d": "Every transition is uniquely determined by a symbol"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "What is the time complexity of simulating a string of length 'n' on a DFA?",
+	    "answers": {
+		"a": "O($ n^2 $)",
+		"b": "O(log n)",
+		"c": "O(1)",
+		"d": "O(n)"
+	    },
+	    "correctAnswer": "d",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "Which of the following best describes the relationship between regular expressions, DFAs, and NFAs?",
+	    "answers": {
+		"a": "Regular expressions are more powerful than DFAs",
+		"b": "DFAs are more powerful than NFAs",
+		"c": "Regular expressions, DFAs, and NFAs are equivalent in power",
+		"d": "DFAs are equivalent to context-free grammars"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "advanced"
+	},
+	{
+	    "question": "Which of the following is true about epsilon transitions in NFA?",
+	    "answers": {
+		"a": "They allow the NFA to change state without reading any input symbol",
+		"b": "They are used to decrease the number of states in DFA",
+		"c": "They make NFA more powerful than DFA",
+		"d": "They are not allowed in NFA"
+	    },
+	    "correctAnswer": "a",
+	    "difficulty": "intermediate"
+	},
+	{
+	    "question": "Which of these operations can be efficiently performed by constructing a DFA for the language?",
+	    "answers": {
+		"a": "Concatenation",
+		"b": "Union",
+		"c": "Membership testing",
+		"d": "Reversal"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "A language is said to be regular if it can be recognized by a:",
+	    "answers": {
+		"a": "Pushdown Automaton",
+		"b": "Context-Free Grammar",
+		"c": "Turing Machine",
+		"d": "Deterministic Finite Automaton"
+	    },
+	    "correctAnswer": "d",
+	    "difficulty": "beginner"
+	},
+	{
+	    "question": "Given two states p and q in a DFA, which of the following conditions implies they are equivalent?",
+	    "answers": {
+		"a": "p and q are both initial states",
+		"b": "p and q are final states",
+		"c": "For every input string, p and q transition to the same states",
+		"d": "There is a path from p to q and vice versa"
+	    },
+	    "correctAnswer": "c",
+	    "difficulty": "advanced"
+	},
+	{
+	    "question": "What is the main difference between a DFA and an NFA?",
+	    "answers": {
+		"a": "DFA has a unique transition for each input symbol in a given state, while NFA may have multiple transitions",
+		"b": "NFA requires more states than DFA",
+		"c": "DFA is used for non-regular languages, while NFA is used for regular languages",
+		"d": "DFA can simulate a Turing Machine"
+	    },
+	    "correctAnswer": "a",
+	    "difficulty": "beginner"
+	}
+    ]
 }
