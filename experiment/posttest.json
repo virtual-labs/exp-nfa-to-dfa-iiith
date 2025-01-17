@@ -55,7 +55,7 @@
 	    },
 	    "correctAnswer": "c",
 	    "difficulty": "beginner"
-	}
+	},
 	{
 	    "question": "Which of the following statements is true regarding the equivalence of DFAs and NFAs?",
 	    "answers": {
