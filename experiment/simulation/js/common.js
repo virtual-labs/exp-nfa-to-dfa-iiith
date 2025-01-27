@@ -117,7 +117,7 @@ window.addEventListener('load', function(e){
             break;
           }
         }
-        swal("Input string was "+nfaComputationStatus+" by NFA and "+dfaComputationStatus+" by DFA");
+        swal("Input string was " + nfaComputationStatus + " by NFA and " + dfaComputationStatus + " by DFA"+'\n'+"Explanation: " + nfa[nfaIndex]["Explanation"][inputIndex]["string"]);
       }
     }
   });
