@@ -29,6 +29,11 @@ const nfa1 = {
       "states": ["A", "B", "B", "C", "C"],
       "reject_path": ["A", "B", "B", "B", "B"]
     }
+  ],
+  "Explanation": [
+    {
+      "string": "Steps for Converting NFA to DFA"
+    }
   ]
 }
 
@@ -88,6 +93,11 @@ const nfa2 = {
       "string": "10101",
       "states": ["A", "A", "A", "A", "B", "C"],
       "reject_path": ["A", "A", "A", "A", "A", "A"]
+    }
+  ],
+  "Explanation": [
+    {
+      "string": "Steps for Converting NFA to DFA"
     }
   ]
 }
