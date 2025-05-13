@@ -1,15 +1,16 @@
 .v-button {
   margin-bottom: 5px;
-  width: 75%;
+  width: 100%;
+  max-width: 200px;
 }
 
 .simulation-grid {
   display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
   margin-top: 20px;
-  padding: 0 30px;
+  padding: 0 15px;
   box-sizing: border-box;
   width: 100%;
   height: auto;
@@ -18,31 +19,33 @@
 .grid-item {
   border: none;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 0;
   box-sizing: border-box;
   background-color: #fff;
+  width: 100%;
 }
 
 #input_cell {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  grid-column: 1 / span 2;
+  justify-content: center;
 }
+
 #input_container {
   width: 100%;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
-  font-size:30px;
+  font-size: 24px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
+
 #input_wrapper {
-  width: 60%;
-  height: 50%;
+  width: 90%;
   min-width: 220px;
   border: 0.2rem solid #97d23d;
   border-radius: 8px;
@@ -50,23 +53,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  margin: 0 auto;
+  justify-content: center;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#input_wrapper h1 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #ccc;
-}
-
 #controls_container {
-  width: 80%;
+  width: 90%;
   border: 0.2rem solid #97d23d;
   border-radius: 8px;
   padding: 10px;
@@ -74,7 +67,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -83,69 +76,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 auto;
-  min-width: 220px;
+  width: 100%;
+  min-height: 200px;
   border: 0.2rem solid black;
   border-radius: 8px;
   padding: 10px;
   box-sizing: border-box;
   background-color: #fafafa;
   overflow: auto;
-  height: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .diagram-block svg {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
 }
 
 .steps-block {
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
   min-width: 220px;
-  /* replaced border: 1px solid #ccc; with: */
   border: 0.2rem solid #97d23d;
   border-radius: 8px;
   padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
   background-color: #fafafa;
-  height: 100%;
+  max-height: 200px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .v-datalist-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   text-align: center;
   margin-bottom: 0.5rem;
   padding-bottom: 0.3rem;
-  padding-left: 0%;
   border-bottom: 1px solid black;
-}
-
-@media screen and (max-width: 768px) {
-  .simulation-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto auto;
-    height: auto;
-    padding: 0 15px;
-  }
-
-  .grid-item {
-    margin-bottom: 20px;
-  }
-
-  #input_wrapper,
-  #controls_container,
-  .diagram-block,
-  .steps-block {
-    width: 100%;
-    height: auto;
-    min-width: auto;
-  }
 }
 
 ul#stack_list_1,
@@ -153,15 +120,14 @@ ul#stack_list_2 {
   list-style-type: disc;
   padding-left: 20px;
   text-align: left;
-  max-height: 100%;
+  max-height: 150px;
   overflow-y: auto;
-
   max-width: 100%;
   overflow-x: auto;
-
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  margin: 0;
 }
 
 #stack_list_1 li,
@@ -169,6 +135,53 @@ ul#stack_list_2 {
   list-style: disc;
   font-family: Arial, sans-serif;
   text-align: left;
-  font-size:16px;
+  font-size: 14px;
   margin-bottom: 0.5em;
+  padding-right: 5px;
+}
+
+/* Desktop styles */
+@media screen and (min-width: 769px) {
+  .simulation-grid {
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 30px;
+  }
+
+  #input_cell {
+    grid-column: auto;
+  }
+
+  .diagram-block svg {
+    max-height: 250px;
+  }
+
+  .steps-block {
+    max-height: 250px;
+  }
+
+  #input_container {
+    font-size: 30px;
+  }
+
+  #stack_list_1 li,
+  #stack_list_2 li {
+    font-size: 16px;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 400px) {
+  #input_container {
+    font-size: 20px;
+  }
+
+  .v-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .v-datalist-title {
+    font-size: 1rem;
+  }
 }
