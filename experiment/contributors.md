@@ -1,8 +1,16 @@
-### Contributors List
+# Contributors
 
-SrNo | Name | Faculty or Student | Department| Institute | Email id
-:--|:--|:--|:--|:--|:--|
-1 | Suryajith Chillara | Faculty | CSTAR | IIIT Hyderabad | suryajith.chillara@iiit.ac.in
-2 | Venkatesh Choppella | Faculty | SERC | IIIT Hyderabad | venkatesh.choppella@iiit.ac.in
-3 | Nithish Raja | Student | CSTAR | IIIT Hyderabad | nithish.raja@research.iiit.ac.in
-4 | Meghana Chitturi | Student | CSTAR | IIIT Hyderabad | meghana.chitturi@students.iiit.ac.in
+## Experiment Developers
+
+- **Prof. Anil Shukla**  
+  Professor, Department of Computer Science and Engineering  
+  Indian Institute of Technology Hyderabad
+
+- **Dr. Jayalal Sarma**  
+  Associate Professor, Department of Computer Science and Engineering  
+  Indian Institute of Technology Madras
+
+## Content Development Team
+
+- Research Scholars, IIT Hyderabad
+- Virtual Labs Development Team 

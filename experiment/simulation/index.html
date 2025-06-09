@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>NFA/DFA Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFA to DFA Conversion - Virtual Labs</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
   <link rel="stylesheet" href="./css/main.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 </head>
 
-<body style="margin: 0; padding: 0;">
+<body class="body-padding">
+  <!-- Mobile Navigation -->
+  <div id="toggle-button-menu">
+    <button class="toggle-instruction-menu" onclick="toggleInstructions()">Instructions</button>
+    <button class="toggle-control-menu" onclick="toggleControls()">Controls</button>
+  </div>
 
-  <div class="container" style="margin-top: 20px;">
+  <div class="container">
+    <!-- Instructions Section -->
     <div class="columns is-centered">
-      <div class="column">
-        <div class="v-collapsible-instruction-container v-instruction-container">
-          <div id="instruction-title" class="v-collapsible is-size-5">
-            Instructions
-          </div>
+      <div id="instruction-container" class="column instruction-container-hide">
+        <div class="v-collapsible-instruction-container v-instruction-container instruction-container-background">
+          <div id="instruction-title" class="v-collapsible is-size-5">Instructions</div>
           <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
             <ul style="list-style: disc;">
-              <li>The left FA is an NFA and the right one is a DFA</li>
-              <li><strong>Change FA</strong> button switches to a different FA</li>
-              <li><strong>Change input</strong> changes the input given to the FA</li>
-              <li><strong>Next</strong> displays the next step in FA simulation</li>
-              <li><strong>Prev</strong> displays the previous step in FA simulation</li>
-              <li>Toggle <strong>Reject path</strong> to switch between accepting paths and rejecting paths</li>
+              <li><strong>Select Example:</strong> Choose from predefined NFA examples to begin conversion</li>
+              <li><strong>Convert NFA to DFA:</strong> Start the subset construction algorithm</li>
+              <li><strong>Step Navigation:</strong> Use Previous/Next buttons to follow the conversion process</li>
+              <li><strong>View Minimization:</strong> Optionally show DFA minimization process</li>
+              <li><strong>Toggle Diagrams:</strong> Show or hide visual representations of automata</li>
+              <li><strong>Reset:</strong> Return to initial state and select a new example</li>
             </ul>
           </div>
         </div>
@@ -33,81 +39,143 @@
     </div>
   </div>
 
-  <br><br><br><br>
-
-  <div class="simulation-grid">
-    <div class="grid-item" id="input_cell">
-      <div id="input_wrapper">
-        <div class="v-datalist-title">Input</div>
-        <div id="input_container"></div>
-      </div>
+  <!-- Main Simulation Area -->
+  <div class="main-container">
+    <!-- Title -->
+    <div class="converter-title">
+      <h1>NFA to DFA Conversion using Subset Construction</h1>
+      <p>Interactive demonstration of subset construction and DFA minimization algorithms</p>
     </div>
 
-    <div class="grid-item">
-      <div class="diagram-block">
-        <svg id="canvas1" width="500" height="200" xmlns="http://www.w3.org/2000/svg" role="img">
-          <title>DFA Diagram</title>
-          <rect x="0" y="0" width="100%" height="100%" fill="lightblue" />
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black">
-            DFA Diagram
-          </text>
-        </svg>
-      </div>
-    </div>
-
-    <div class="grid-item">
-      <div class="diagram-block">
-        <svg id="canvas2" width="400" height="200" xmlns="http://www.w3.org/2000/svg" role="img">
-          <title>NFA Diagram</title>
-          <rect x="0" y="0" width="100%" height="100%" fill="lightgreen" />
-          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black">
-            NFA Diagram
-          </text>
-        </svg>
-      </div>
-    </div>
-
-    <div class="grid-item">
-      <div id="controls_container">
-        <div class="v-datalist-title">Controls</div>
-        <br>
-        <button id="change_fa" type="button" class="v-button">Change FA</button>
-        <button id="change_input" type="button" class="v-button">Change Input</button>
-        <button id="next" type="button" class="v-button">Next</button>
-        <button id="prev" type="button" class="v-button">Previous</button>
-        <div style="margin-top: 15px;">
-          <input type="checkbox" id="path_switch">
-          <label for="path_switch">Reject path</label>
+    <!-- Controls Section -->
+    <div id="control-container" class="controls-section control-container-hide">
+      <div class="control-group">
+        <div class="control-item">
+          <label class="control-label">Select Example:</label>
+          <select id="example-selector" class="select-dropdown">
+            <option value="0">Simple NFA with ε-transitions</option>
+            <option value="1">NFA with multiple paths</option>
+          </select>
         </div>
+        
+        <button id="convert-btn" class="btn btn-primary">
+          <span>⚡</span> Convert NFA to DFA
+        </button>
+        
+        <button id="reset-btn" class="btn btn-secondary">
+          <span>🔄</span> Reset
+        </button>
+        
+        <button id="toggle-diagrams-btn" class="btn btn-info">
+          <span>👁️</span> Toggle Diagrams
+        </button>
       </div>
     </div>
 
-    <div class="grid-item">
-      <div class="steps-block">
-        <div class="v-datalist-title">DFA Steps</div>
-        <br>
-        <ul id="stack_list_1"></ul>
-      </div>
+    <!-- Simulation Content -->
+    <div id="simulation-content">
+      <!-- React component will be rendered here -->
     </div>
 
-    <div class="grid-item">
-      <div class="steps-block">
-        <div class="v-datalist-title">NFA Steps</div>
-        <br>
-        <ul id="stack_list_2"></ul>
+    <!-- Step Navigation (shown during conversion) -->
+    <div id="step-navigation" class="steps-navigation" style="display: none; justify-content: center; margin: 20px 0;">
+      <button id="prev-step-btn" class="btn btn-secondary">Previous</button>
+      <span id="step-counter" class="step-counter">Step 1 of 1</span>
+      <button id="next-step-btn" class="btn btn-secondary">Next</button>
+    </div>
+
+    <!-- Results Area -->
+    <div id="results-area">
+      <!-- Results will be populated here -->
+    </div>
+
+    <!-- Algorithm Overview -->
+    <div class="algorithm-explanation">
+      <h3>Algorithm Overview</h3>
+      <div class="algorithm-grid">
+        <div class="algorithm-section">
+          <h4 style="color: #667eea;">Subset Construction (NFA → DFA)</h4>
+          <ol>
+            <li>Start with ε-closure of NFA start state</li>
+            <li>For each unmarked DFA state and alphabet symbol:
+              <div class="sub-step">• Compute move(state, symbol)</div>
+              <div class="sub-step">• Compute ε-closure of result</div>
+              <div class="sub-step">• Create new DFA state if needed</div>
+            </li>
+            <li>Repeat until no unmarked states remain</li>
+            <li>Mark accept states (contain NFA accept states)</li>
+          </ol>
+        </div>
+        <div class="algorithm-section">
+          <h4 style="color: #11998e;">DFA Minimization</h4>
+          <ol>
+            <li>Create table of state pairs</li>
+            <li>Mark pairs where one accepts, other doesn't</li>
+            <li>For each unmarked pair (p,q):
+              <div class="sub-step">• Check if δ(p,a) and δ(q,a) are marked</div>
+              <div class="sub-step">• If so, mark (p,q) as distinguishable</div>
+            </li>
+            <li>Repeat until no new marks made</li>
+            <li>Group unmarked pairs as equivalent states</li>
+          </ol>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="./js/data.js"></script>
-  <script src="./js/global.js"></script>
-  <script src="./js/helper.js"></script>
-  <script src="./js/main_nfa.js"></script>
-  <script src="./js/main_dfa.js"></script>
-  <script src="./js/common.js"></script>
+  <script src="./js/main.js"></script>
 
+  <script>
+    // Mobile navigation functions
+    function toggleInstructions() {
+      const container = document.getElementById('instruction-container');
+      if (container.classList.contains('instruction-container-hide')) {
+        container.classList.remove('instruction-container-hide');
+        container.classList.add('instruction-container-show');
+      } else {
+        container.classList.remove('instruction-container-show');
+        container.classList.add('instruction-container-hide');
+      }
+    }
+
+    function toggleControls() {
+      const container = document.getElementById('control-container');
+      if (container.classList.contains('control-container-hide')) {
+        container.classList.remove('control-container-hide');
+        container.classList.add('control-container-show');
+      } else {
+        container.classList.remove('control-container-show');
+        container.classList.add('control-container-hide');
+      }
+    }
+
+    // Close mobile menus when clicking outside
+    document.addEventListener('click', function(event) {
+      const instructionContainer = document.getElementById('instruction-container');
+      const controlContainer = document.getElementById('control-container');
+      const toggleMenu = document.getElementById('toggle-button-menu');
+      
+      if (!toggleMenu.contains(event.target)) {
+        if (instructionContainer.classList.contains('instruction-container-show')) {
+          instructionContainer.classList.remove('instruction-container-show');
+          instructionContainer.classList.add('instruction-container-hide');
+        }
+        if (controlContainer.classList.contains('control-container-show')) {
+          controlContainer.classList.remove('control-container-show');
+          controlContainer.classList.add('control-container-hide');
+        }
+      }
+    });
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof initializeNFAToDFAConverter === 'function') {
+        initializeNFAToDFAConverter();
+      }
+    });
+  </script>
 </body>
 
-</html>
+</html> 
