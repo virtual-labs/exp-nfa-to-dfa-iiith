@@ -1,6 +1,46 @@
-### Procedure
 
-1. Please go through the theory to understand the formalisms of Deterministic finite automata (DFAs) and Non-Deterministic finite automata (NFAs). Try to differentiate the notion on non-determinism from either determinism or randomness. Further, understand how
-2. Once you are well acquainted with the theoretical aspects of how a NFA can be converted to a DFA, you may head to the simulation section of this experiment. Here, you would see a non-deterministic finite automaton, an input string, and some controls on the left (above in the portrait mode) part of your page. On the other side, you would see a deterministic finite automaton that is equivalent to the recently described NFA.  Please follow the instructions at the top of the page to help you use the controls. This simulation helps you understand the notion of "string acceptance by a non-deterministic finite automata, deterministic finite automata and equivalence between them". As you have seen before, unlike the case of DFAs, there could exist more than one run for a given input string (due to non-determinism). Some runs could lead to rejection and some runs could lead to acceptance. Even those can be simulated using a DFA through the subset construction described in the theory part of this experiment.
 
-3. We strongly advise you to do the pre- and post-tests to gain more familiarity with the concepts.
+### Simulation Steps
+
+#### Step 1: Select NFA Example
+- Choose from the provided NFA examples in the dropdown menu
+- Each example demonstrates different aspects of NFA to DFA conversion
+- The selected NFA will be displayed with its formal specification
+
+#### Step 2: Examine the Original NFA
+- Review the NFA structure including states, alphabet, transitions, and accept states
+- Pay attention to non-deterministic transitions and epsilon (ε) transitions
+- Understand the language accepted by the NFA
+
+#### Step 3: Start the Conversion Process
+- Click the "Convert NFA to DFA" button to begin the subset construction algorithm
+- The conversion will proceed step by step, showing each stage of the process
+
+#### Step 4: Follow the Conversion Steps
+- Use the "Previous" and "Next" buttons to navigate through conversion steps
+- Each step shows:
+  - Current DFA state being processed
+  - Symbol being processed
+  - Move operation result
+  - Epsilon closure calculation
+  - New DFA state creation or existing state identification
+
+#### Step 5: Analyze the Resulting DFA
+- Examine the final DFA structure
+- Compare the number of states between NFA and DFA
+- Verify that the DFA accepts the same language as the original NFA
+
+#### Step 6: Explore DFA Minimization (Optional)
+- Click "Show DFA Minimization" to see the minimization process
+- Observe how equivalent states are grouped together
+- Compare the minimized DFA with the original converted DFA
+
+#### Step 7: Toggle Visualizations
+- Use "Show/Hide Diagrams" to control the visual display
+- View the automata as both diagrams and formal specifications
+- Use diagrams to better understand state transitions and structure
+
+#### Step 8: Experiment with Different Examples
+- Try different NFA examples to see various conversion scenarios
+- Compare how different NFA structures affect the resulting DFA
+- Observe cases where the DFA has exponentially more states than the NFA 

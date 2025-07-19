@@ -1,9 +1,3 @@
-### Aim of the experiment
+A non-deterministic finite automaton (NFA) is a theoretical model of computation that can be in multiple states simultaneously and may have epsilon (ε) transitions. While NFAs are more expressive and easier to construct for certain languages, they are not directly implementable in hardware or software. 
 
-After having studied DFAs and NFAs, a natural question to ask is the following.
-
-> Are there languages that are accepted by NFAs but not by DFAs?
-
-It was shown that the answer to the above question is **no**. In fact, there are algorithms to construct equivalent deterministic finite automatons, given a non-deterministic finite automaton as input.
-
-This experiment is designed to show that NFAs and DFAs are equivalent by constructing an equivalent DFA of the given NFA (through power-set construction).
+This experiment is designed to help students understand the process of converting an NFA to an equivalent deterministic finite automaton (DFA) using the subset construction algorithm, demonstrating that both models have identical computational power for regular languages. 

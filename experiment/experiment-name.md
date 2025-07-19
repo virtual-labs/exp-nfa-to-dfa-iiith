@@ -1,1 +1,1 @@
-## Converting a Non-deterministic Finite Automaton to a Deterministic Finite Automaton
+## NFA to DFA Conversion using Subset Construction 
