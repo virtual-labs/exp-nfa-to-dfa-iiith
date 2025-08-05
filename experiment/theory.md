@@ -170,11 +170,13 @@ Let's convert an NFA that accepts strings ending with "01" to a DFA:
 
 7. **From {q₀, q₂} on '1'**: δ({q₀, q₂}, 1) = {q₀}
 
+{% raw %}
 **Resulting DFA:**
 
 - States: {{q₀}, {q₀, q₁}, {q₀, q₂}}
 - Start: {q₀}
 - Accept: {{q₀, q₂}} (contains q₂)
+{% endraw %}
 
 ## Handling Epsilon Transitions
 
