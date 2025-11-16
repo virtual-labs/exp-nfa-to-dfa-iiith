@@ -1,0 +1,39 @@
+
+/home/runner/work/exp-nfa-to-dfa-iiith/exp-nfa-to-dfa-iiith/experiment/simulation/mobile-detection.js
+  393:7   warning  'mobileDetection' is assigned a value but never used  no-unused-vars
+  396:38  warning  'module' is not defined                               no-undef
+  397:3   warning  'module' is not defined                               no-undef
+
+/home/runner/work/exp-nfa-to-dfa-iiith/exp-nfa-to-dfa-iiith/experiment/simulation/nfatodfa.js
+    58:5   warning  'swal' is not defined                                 no-undef
+   242:10  warning  'newElement' is defined but never used                no-unused-vars
+   257:10  warning  'createCurvedPath' is defined but never used          no-unused-vars
+   273:57  warning  'inputIndex' is not defined                           no-undef
+   276:22  warning  'inputPointer' is not defined                         no-undef
+   277:22  warning  'inputPointer' is not defined                         no-undef
+   722:3   warning  'swal' is not defined                                 no-undef
+   745:11  warning  'swal' is not defined                                 no-undef
+   790:5   warning  'swal' is not defined                                 no-undef
+   799:5   warning  'swal' is not defined                                 no-undef
+   810:5   warning  'swal' is not defined                                 no-undef
+   903:10  warning  'refreshInput' is defined but never used              no-unused-vars
+   906:54  warning  'inputIndex' is not defined                           no-undef
+   912:9   warning  'inputPointer' is not defined                         no-undef
+   925:32  warning  'inputPointer' is not defined                         no-undef
+   934:10  warning  'resetStack' is defined but never used                no-unused-vars
+   940:58  warning  'inputIndex' is not defined                           no-undef
+   960:10  warning  'removeFromStack' is defined but never used           no-unused-vars
+  1028:10  warning  'stringToStateSet' is defined but never used          no-unused-vars
+  1038:9   warning  'userTransitions' is assigned a value but never used  no-unused-vars
+  1041:5   warning  'swal' is not defined                                 no-undef
+  1052:5   warning  'swal' is not defined                                 no-undef
+  1068:5   warning  'swal' is not defined                                 no-undef
+  1130:43  warning  'nfa' is defined but never used                       no-unused-vars
+  1270:5   warning  'swal' is not defined                                 no-undef
+  1296:3   warning  'swal' is not defined                                 no-undef
+  1311:43  warning  'e' is defined but never used                         no-unused-vars
+  1324:5   warning  'swal' is not defined                                 no-undef
+  1346:7   warning  'swal' is not defined                                 no-undef
+
+✖ 32 problems (0 errors, 32 warnings)
+

@@ -1,0 +1,158 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "In subset construction, what is the first step to create the initial DFA state?",
+      "answers": {
+        "a": "Take all NFA states",
+        "b": "Take the NFA start state only",
+        "c": "Compute epsilon closure of the NFA start state", 
+        "d": "Take all accepting states"
+      },
+      "explanations": {
+        "a": "Incorrect. We don't start with all NFA states.",
+        "b": "Incorrect. We need to consider epsilon transitions from the start state.",
+        "c": "Correct. The initial DFA state is the epsilon closure of the NFA start state, including all states reachable via epsilon transitions.",
+        "d": "Incorrect. Accepting states are not used to form the initial state."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What operation is performed after computing the move function in subset construction?",
+      "answers": {
+        "a": "Check for accepting states",
+        "b": "Compute epsilon closure",
+        "c": "Create new transitions",
+        "d": "Minimize the DFA"
+      },
+      "explanations": {
+        "a": "Incorrect. Checking for accepting states comes later in the process.",
+        "b": "Correct. After computing the move function, we apply epsilon closure to the resulting set of states.",
+        "c": "Incorrect. Creating new transitions happens after epsilon closure computation.",  
+        "d": "Incorrect. Minimization is a separate process that occurs after DFA construction."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "How many DFA states can potentially be created from an NFA with n states?",
+      "answers": {
+        "a": "At most n states",
+        "b": "Exactly n states",
+        "c": "At most 2^n states",
+        "d": "Always more than n states"
+      },
+      "explanations": {
+        "a": "Incorrect. The DFA can have more states than the NFA.",
+        "b": "Incorrect. The number of DFA states is not necessarily equal to NFA states.",
+        "c": "Correct. Since each DFA state represents a subset of NFA states, there can be at most 2^n possible subsets.",
+        "d": "Incorrect. In some cases, the DFA might have the same or fewer states than the NFA."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "In the move function move(T, a), what does T represent?",
+      "answers": {
+        "a": "A single NFA state",
+        "b": "A set of NFA states",
+        "c": "An input symbol",
+        "d": "A DFA transition"
+      },
+      "explanations": {
+        "a": "Incorrect. T represents multiple states, not a single state.",
+        "b": "Correct. T represents a set of NFA states from which we want to find transitions on symbol 'a'.",
+        "c": "Incorrect. The input symbol is represented by 'a', not T.",
+        "d": "Incorrect. T is not a transition but a set of states."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What happens when a DFA state corresponds to an empty set of NFA states?",
+      "answers": {
+        "a": "It becomes an accepting state",
+        "b": "It becomes a trap state (non-accepting with self-loops)",
+        "c": "It is removed from the DFA",
+        "d": "It causes an error in the algorithm"
+      },
+      "explanations": {
+        "a": "Incorrect. An empty set does not contain accepting states, so it cannot be accepting.",
+        "b": "Correct. An empty set typically corresponds to a trap state that rejects all further input.",
+        "c": "Incorrect. Empty sets are usually represented as trap states rather than being removed.",
+        "d": "Incorrect. Empty sets are handled properly by the algorithm."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "When constructing a DFA from an NFA, how do you determine if a DFA state should be accepting?",
+      "answers": {
+        "a": "If it has the most NFA states",
+        "b": "If it includes the NFA start state",
+        "c": "If it contains at least one NFA accepting state",
+        "d": "If all its NFA states are accepting"
+      },
+      "explanations": {
+        "a": "Incorrect. The number of NFA states doesn't determine acceptance.",
+        "b": "Incorrect. Including the start state doesn't make a DFA state accepting.",
+        "c": "Correct. A DFA state is accepting if and only if it contains at least one accepting state from the original NFA.",
+        "d": "Incorrect. It's sufficient to have just one accepting NFA state."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the primary goal of DFA minimization after NFA to DFA conversion?",
+      "answers": {
+        "a": "To reduce memory usage by merging equivalent states",
+        "b": "To change the language accepted by the DFA",
+        "c": "To make the DFA non-deterministic",
+        "d": "To add more transitions to the DFA"
+      },
+      "explanations": {
+        "a": "Correct. DFA minimization aims to reduce the number of states by identifying and merging equivalent states, thus reducing memory usage while preserving the accepted language.",
+        "b": "Incorrect. Minimization must preserve the same language acceptance.",
+        "c": "Incorrect. Minimization maintains determinism.",
+        "d": "Incorrect. Minimization typically reduces rather than adds transitions."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In the table-filling method for DFA minimization, when are two states marked as distinguishable?",
+      "answers": {
+        "a": "When they have different numbers of outgoing transitions",
+        "b": "When one is accepting and the other is not, or when they transition to distinguishable states",
+        "c": "When they have the same set of outgoing transitions",
+        "d": "When they are both accepting states"
+      },
+      "explanations": {
+        "a": "Incorrect. The number of transitions doesn't determine distinguishability.",
+        "b": "Correct. States are distinguishable if they have different acceptance status or if they transition to already distinguishable states on some input.",
+        "c": "Incorrect. Having the same transitions would suggest they might be equivalent, not distinguishable.",
+        "d": "Incorrect. Both being accepting doesn't make them distinguishable."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the computational complexity relationship between NFAs and DFAs in terms of recognition time?",
+      "answers": {
+        "a": "NFAs are always faster than DFAs",
+        "b": "DFAs provide O(n) recognition time while NFAs may require exponential time",
+        "c": "Both have the same recognition time complexity",
+        "d": "NFAs are faster for short strings, DFAs for long strings"
+      },
+      "explanations": {
+        "a": "Incorrect. DFAs are generally more efficient for string recognition.",
+        "b": "Correct. DFAs can recognize strings in linear time O(n) where n is the string length, while direct NFA simulation might require exponential time due to multiple state tracking.",
+        "c": "Incorrect. Their time complexities differ significantly.",
+        "d": "Incorrect. DFAs maintain linear time regardless of string length."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    }
+  ]
+} 

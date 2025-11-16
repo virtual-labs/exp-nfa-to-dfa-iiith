@@ -1,0 +1,158 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What does NFA stand for?",
+      "answers": {
+        "a": "Non-deterministic Finite Automaton",
+        "b": "New Finite Automaton", 
+        "c": "Normal Finite Automaton",
+        "d": "Nested Finite Automaton"
+      },
+      "explanations": {
+        "a": "Correct. NFA stands for Non-deterministic Finite Automaton, which allows multiple transitions from a state on the same input symbol.",
+        "b": "Incorrect. NFA does not stand for New Finite Automaton.",
+        "c": "Incorrect. NFA does not stand for Normal Finite Automaton.",
+        "d": "Incorrect. NFA does not stand for Nested Finite Automaton."
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "Which of the following is a key difference between NFA and DFA?",
+      "answers": {
+        "a": "DFA has more states than NFA",
+        "b": "NFA can have multiple transitions from one state on the same input",
+        "c": "DFA uses a different alphabet",
+        "d": "NFA cannot have accepting states"
+      },
+      "explanations": {
+        "a": "Incorrect. The number of states depends on the specific automaton, not the type.",
+        "b": "Correct. NFAs can have multiple transitions from a single state on the same input symbol, while DFAs have exactly one transition.",
+        "c": "Incorrect. Both NFAs and DFAs can use the same alphabet.",
+        "d": "Incorrect. NFAs can and do have accepting states."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What are epsilon (ε) transitions in an NFA?",
+      "answers": {
+        "a": "Transitions that consume input symbols",
+        "b": "Transitions that don't consume any input symbol",
+        "c": "Transitions to accepting states only",
+        "d": "Transitions that reject the input"
+      },
+      "explanations": {
+        "a": "Incorrect. Regular transitions consume input symbols, but epsilon transitions do not.",
+        "b": "Correct. Epsilon transitions allow the automaton to move between states without consuming any input symbol.",
+        "c": "Incorrect. Epsilon transitions can lead to any state, not just accepting states.",
+        "d": "Incorrect. Epsilon transitions do not reject input; they are used for state transitions."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the epsilon closure of a set of states?",
+      "answers": {
+        "a": "The set of states reachable using only input symbols",
+        "b": "The set of all accepting states",
+        "c": "The set of states reachable using only epsilon transitions",
+        "d": "The set of states that reject input"
+      },
+      "explanations": {
+        "a": "Incorrect. This describes states reachable by regular transitions, not epsilon closure.",
+        "b": "Incorrect. Epsilon closure is not related to accepting states specifically.",
+        "c": "Correct. The epsilon closure includes the original states plus all states reachable through epsilon transitions only.",
+        "d": "Incorrect. Epsilon closure is not related to rejection of input."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In the subset construction algorithm, each DFA state represents:",
+      "answers": {
+        "a": "A single NFA state",
+        "b": "A subset of NFA states",
+        "c": "A transition in the NFA",
+        "d": "An input symbol"
+      },
+      "explanations": {
+        "a": "Incorrect. DFA states in subset construction represent multiple NFA states.",
+        "b": "Correct. Each DFA state corresponds to a subset of NFA states that the NFA could be in simultaneously.",
+        "c": "Incorrect. DFA states do not represent transitions.",
+        "d": "Incorrect. DFA states do not represent input symbols."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "When is a DFA state considered accepting in the subset construction?",
+      "answers": {
+        "a": "When it contains only accepting NFA states",
+        "b": "When it contains at least one accepting NFA state",
+        "c": "When it is the start state",
+        "d": "When it has no outgoing transitions"
+      },
+      "explanations": {
+        "a": "Incorrect. A DFA state is accepting even if it contains non-accepting NFA states, as long as it contains at least one accepting NFA state.",
+        "b": "Correct. A DFA state is accepting if it contains at least one accepting state from the original NFA.",
+        "c": "Incorrect. The start state is not necessarily accepting unless it meets the condition in option b.",
+        "d": "Incorrect. The presence of outgoing transitions does not determine if a state is accepting."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the time complexity of the subset construction algorithm in the worst case?",
+      "answers": {
+        "a": "O(n)",
+        "b": "O(n²)",
+        "c": "O(2^n)",
+        "d": "O(n log n)"
+      },
+      "explanations": {
+        "a": "Incorrect. The worst-case complexity is much higher than linear.",
+        "b": "Incorrect. The worst-case complexity is exponential, not quadratic.",
+        "c": "Correct. In the worst case, the subset construction can create up to 2^n DFA states for an NFA with n states.",
+        "d": "Incorrect. The worst-case complexity is exponential, not O(n log n)."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Which statement about DFA minimization is correct?",
+      "answers": {
+        "a": "All DFAs can be minimized to have exactly one state",
+        "b": "DFA minimization always reduces the number of states",
+        "c": "The minimized DFA accepts a different language than the original",
+        "d": "DFA minimization removes equivalent states while preserving the accepted language"
+      },
+      "explanations": {
+        "a": "Incorrect. Not all DFAs can be minimized to one state; it depends on the language they accept.",
+        "b": "Incorrect. If a DFA is already minimal, minimization won't reduce the number of states.",
+        "c": "Incorrect. The minimized DFA must accept exactly the same language as the original DFA.",
+        "d": "Correct. DFA minimization identifies and merges equivalent states while ensuring the same language is accepted."
+      },
+      "correctAnswer": "d",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the relationship between the languages accepted by an NFA and its equivalent DFA?",
+      "answers": {
+        "a": "The DFA accepts a subset of the NFA's language",
+        "b": "The NFA accepts a subset of the DFA's language", 
+        "c": "They accept exactly the same language",
+        "d": "They accept completely different languages"
+      },
+      "explanations": {
+        "a": "Incorrect. The DFA accepts exactly the same language as the NFA, not a subset.",
+        "b": "Incorrect. The NFA accepts exactly the same language as the DFA, not a subset.",
+        "c": "Correct. By definition, an NFA and its equivalent DFA constructed through subset construction accept exactly the same language.",
+        "d": "Incorrect. An NFA and its equivalent DFA must accept the same language to be considered equivalent."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    }
+  ]
+} 

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NFA to DFA Conversion - Automata Theory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="mobile-detection.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            primary: '#3B82F6', // blue-500
+            secondary: '#6366F1', // indigo-500
+            accent: '#10B981', // green-500
+            danger: '#EF4444', // red-500
+            neutral: '#F3F4F6', // gray-100
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #fff;
+      min-height: 100vh;
+      width: 100vw;
+      max-width: 100vw;
+      overflow-x: hidden;
+      /* Make body use all available height */
+      height: 100vh;
+    }
+    .glass-morphism {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .dark-glass {
+      background: rgba(243, 244, 246, 0.7); /* gray-100 */
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #3B82F6, #6366F1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .floating-card {
+      transform: translateY(0);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .floating-card:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 1.25rem 2.5rem rgba(59, 130, 246, 0.08);
+    }
+    
+    .neu-button {
+      background: #fff;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 0.125rem 0.5rem rgba(59, 130, 246, 0.06);
+      transition: all 0.2s ease;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem !important;
+      min-width: 110px;
+      min-height: 2.5rem;
+      border-radius: 0.9rem !important;
+    }
+    .neu-button.primary {
+      background: #3B82F6;
+      color: #fff;
+      border: none;
+    }
+    .neu-button.secondary {
+      background: #6366F1;
+      color: #fff;
+      border: none;
+    }
+    .neu-button.accent {
+      background: #10B981;
+      color: #fff;
+      border: none;
+    }
+    .neu-button.danger {
+      background: #EF4444;
+      color: #fff;
+      border: none;
+    }
+    .neu-button:hover {
+      filter: brightness(0.95);
+      box-shadow: 0 0.25rem 1rem rgba(59, 130, 246, 0.10);
+    }
+    .neu-button:active {
+      filter: brightness(0.90);
+    }
+    /* Responsive grid for main panels */
+    #main-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 1024px) {
+      #main-panels {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+    #dfa-diagram-container {
+      grid-column: span 2;
+    }
+    @media (max-width: 1024px) {
+      #dfa-diagram-container {
+        grid-column: span 1;
+      }
+    }
+    #input-panel, #trace-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .panel-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+    #input_container {
+      background: #F3F4F6;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      color: #1e293b;
+      font-size: 1.5rem;
+      text-align: center;
+      min-height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: auto;
+    }
+    .input-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    #trace-container {
+      background: #F3F4F6;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      backdrop-filter: blur(6px);
+      overflow-y: auto;
+      max-height: 30vh;
+      min-height: 10vh;
+    }
+    #stack_list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    #stack_list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    #stack_list li:last-child {
+      border-bottom: none;
+    }
+    /* Responsive tweaks for panels and diagram */
+    .max-w-7xl {
+      max-width: 100vw;
+      padding-left: 0.5vw;
+      padding-right: 0.5vw;
+    }
+    .rounded-2xl, .rounded-3xl {
+      border-radius: 0.75rem;
+    }
+    @media (max-width: 768px) {
+      .rounded-2xl, .rounded-3xl {
+        border-radius: 0.75rem;
+      }
+      .floating-card, .glass-morphism, .dark-glass {
+        padding: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+      }
+      .max-w-7xl {
+        padding-left: 0.5vw;
+        padding-right: 0.5vw;
+      }
+      #input_container {
+        font-size: 1rem !important;
+        padding: 0.5rem !important;
+        min-height: 1.5rem !important;
+      }
+      #trace-container {
+        max-height: 15vh !important;
+        min-height: 0 !important;
+        padding: 0.5rem !important;
+      }
+      #canvas1 {
+        height: 32vw !important;
+        min-height: 80px !important;
+        max-height: 120px !important;
+      }
+    }
+    /* Make SVG diagram responsive */
+    #canvas1 {
+      width: 100vw !important;
+      max-width: 100%;
+      height: 35vw !important;
+      min-height: 180px;
+      max-height: 320px;
+      display: block;
+      margin: auto;
+    }
+    @media (max-width: 768px) {
+      #canvas1 {
+        height: 45vw !important;
+        min-height: 120px;
+        max-height: 220px;
+      }
+    }
+    /* Responsive footer */
+    footer {
+      width: 100vw;
+      max-width: 100vw;
+      padding-left: 2vw;
+      padding-right: 2vw;
+    }
+    /* Make all text dark for better visibility */
+    body, .text-gray-800, .text-gray-700, .text-black, .panel-title, h2, h3, span, p, label, .font-semibold, .font-medium, .font-bold, .font-mono, .font-sans, .font-inter {
+      color: #18181b !important;
+    }
+    .bg-neutral, .dark-glass, .glass-morphism {
+      color: #18181b !important;
+    }
+    /* Remove any text-white or light text overrides */
+    .text-white, .text-gray-100, .text-gray-200, .text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600 {
+      color: #18181b !important;
+    }
+    /* Button text color override for contrast */
+    .neu-button.primary, .neu-button.secondary, .neu-button.accent, .neu-button.danger {
+      color: #fff !important;
+    }
+    /* For step numbers in Quick Guide, keep white for contrast */
+    .w-6.bg-primary .text-white, .w-6.bg-secondary .text-white, .w-6.bg-accent .text-white, .w-6.bg-danger .text-white {
+      color: #fff !important;
+    }
+    /* Make main control buttons fatter (taller and wider) */
+    .neu-button {
+      padding: 0.75rem 1.5rem !important;
+      font-size: 1.05rem !important;
+      min-width: 110px;
+      min-height: 2.5rem;
+      border-radius: 0.9rem !important;
+    }
+    .neu-button svg {
+      width: 1.15em;
+      height: 1.15em;
+    }
+    /* Slightly increase gap between buttons for clarity */
+    .flex.flex-wrap.gap-2, .flex.flex-wrap.md\:gap-2 {
+      gap: 0.75rem !important;
+    }
+    
+    /* Better scrolling for construction steps */
+    #construction_steps {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e0 #f7fafc;
+    }
+    #construction_steps::-webkit-scrollbar {
+      width: 6px;
+    }
+    #construction_steps::-webkit-scrollbar-track {
+      background: #f7fafc;
+      border-radius: 3px;
+    }
+    #construction_steps::-webkit-scrollbar-thumb {
+      background: #cbd5e0;
+      border-radius: 3px;
+    }
+    #construction_steps::-webkit-scrollbar-thumb:hover {
+      background: #a0aec0;
+    }
+    
+    /* Mobile adjustments for construction steps */
+    @media (max-width: 1024px) {
+      .bg-neutral.rounded-xl.p-3.backdrop-blur-sm.flex-1.overflow-y-auto {
+        max-height: 200px !important;
+        min-height: 120px !important;
+      }
+    }
+  </style>
+</head>
+<body class="text-gray-800 overflow-x-hidden bg-white">
+
+  <!-- Quick Guide Panel (Compact) -->
+  <div class="floating-card glass-morphism rounded-2xl p-4 shadow-lg max-w-7xl mx-auto mb-4">
+    <div class="flex items-center justify-between mb-3">        <h2 class="text-lg font-semibold text-gray-800 flex items-center">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-2 5a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+          Quick Guide - NFA to DFA Conversion
+        </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="dark-glass rounded-xl p-3 text-center">
+        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mx-auto mb-2">
+          <span class="text-white font-bold text-xs">1</span>
+        </div>
+        <p class="text-gray-700 text-xs">Select an NFA and study its structure</p>
+      </div>
+      <div class="dark-glass rounded-xl p-3 text-center">
+        <div class="w-6 h-6 bg-secondary rounded-full flex items-center justify-center mx-auto mb-2">
+          <span class="text-white font-bold text-xs">2</span>
+        </div>
+        <p class="text-gray-700 text-xs">Create DFA states using powerset construction</p>
+      </div>
+      <div class="dark-glass rounded-xl p-3 text-center">
+        <div class="w-6 h-6 bg-accent rounded-full flex items-center justify-center mx-auto mb-2">
+          <span class="text-white font-bold text-xs">3</span>
+        </div>
+        <p class="text-gray-700 text-xs">Add transitions between DFA states</p>
+      </div>
+      <div class="dark-glass rounded-xl p-3 text-center">
+        <div class="w-6 h-6 bg-danger rounded-full flex items-center justify-center mx-auto mb-2">
+          <span class="text-white font-bold text-xs">4</span>
+        </div>
+        <p class="text-gray-700 text-xs">Validate your DFA construction</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Container - Vertical Layout -->
+  <div class="max-w-7xl mx-auto px-4 pb-16 flex flex-col gap-6 min-h-[80vh]">
+    <!-- NFA Panel with Construction Steps (Top) -->
+    <div class="floating-card glass-morphism rounded-3xl p-4 shadow-xl">
+      <div class="flex flex-col lg:flex-row gap-4">
+        <!-- NFA Display Area -->
+        <div class="flex-1 lg:w-2/3">
+          <div class="dark-glass rounded-2xl p-3 flex flex-col gap-3">
+            <div class="flex flex-col md:flex-row md:items-center gap-3">
+              <div class="flex-1">
+                <h3 class="text-base font-semibold text-gray-800 mb-1 flex items-center">
+                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                  Source NFA
+                </h3>
+                <div id="NFA_description_container" class="mb-2">
+                  <div class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-2 border border-gray-200">
+                    <span id="NFA_description" class="text-black font-medium text-sm">Select an NFA to start conversion</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-wrap gap-2 md:gap-2 justify-end md:justify-start">
+                <button id="change_nfa" class="neu-button primary px-2 py-1 rounded-xl font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                  </svg>
+                  Change NFA
+                </button>
+                <button id="reset_construction" class="neu-button danger px-2 py-1 rounded-xl font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                  </svg>
+                  Reset
+                </button>
+              </div>
+            </div>
+            <div class="bg-neutral rounded-xl p-2 backdrop-blur-sm flex-1 flex items-center justify-center min-h-[200px]">
+              <svg id="nfa_canvas" width="100%" height="200" class="rounded-lg bg-white shadow-inner" style="display:block; margin:auto;"></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Construction Steps Sidebar -->
+        <div class="lg:w-1/3 w-full">
+          <div class="dark-glass rounded-2xl p-3 h-full flex flex-col">
+            <h4 class="text-sm font-semibold text-gray-800 mb-3 flex items-center">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
+              Construction Steps
+            </h4>
+            <div class="bg-neutral rounded-xl p-3 backdrop-blur-sm flex-1 overflow-y-auto min-h-[150px] max-h-[300px]">
+              <ul id="construction_steps" class="space-y-2 text-sm"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- DFA Construction Panel (Bottom - Full Width) -->
+    <div class="floating-card glass-morphism rounded-2xl p-1 shadow-xl flex-1">
+      <div class="dark-glass rounded-xl p-1 h-full flex flex-col">
+        <h3 class="text-base font-semibold text-gray-800 mb-1 flex items-center px-3 py-1">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Construct Equivalent DFA
+        </h3>
+        <div class="flex flex-wrap gap-1 mb-1 px-2">
+          <button id="add_state" class="neu-button secondary px-2 py-1 rounded-lg font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+            </svg>
+            Add State
+          </button>
+          <button id="add_transition" class="neu-button accent px-2 py-1 rounded-lg font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+            Add Transition
+          </button>
+          <button id="undo_action" class="neu-button px-2 py-1 rounded-lg font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
+            </svg>
+            Undo
+          </button>
+          <button id="show_hint" class="neu-button px-2 py-1 rounded-lg font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1" style="background: #f59e0b; color: #fff;">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+            </svg>
+            Hint
+          </button>
+          <button id="validate_dfa" class="neu-button primary px-2 py-1 rounded-lg font-medium text-xs transition-all hover:scale-105 active:scale-95 flex items-center gap-1">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            Validate
+          </button>
+        </div>
+        <svg id="dfa_canvas" width="100%" height="450" class="bg-white shadow-inner" style="display:block;"></svg>
+      </div>
+    </div>
+  </div>
+
+  <script src="nfatodfa.js"></script>
+<script src="../assets/js/iframeResize.js"></script>
+        
+        </body>
+</html>
