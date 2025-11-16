@@ -1,1 +1,1 @@
-## Experiment name
+## NFA to DFA Conversion using Subset Construction 
