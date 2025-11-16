@@ -17,6 +17,15 @@ Non-deterministic Finite Automata are computational models that extend the conce
 3. **Non-deterministic Acceptance**: A string is accepted if there exists at least one computational path that leads to an accepting state
 4. **Parallel Computation Model**: Conceptually, an NFA explores all possible paths simultaneously
 
+#### Epsilon-Closure Definition
+
+The **epsilon-closure** (ε-closure) of a state or set of states is a fundamental concept when working with NFAs that have ε-transitions:
+
+- **ε-closure of a single state q**: The set of all states reachable from q using zero or more ε-transitions (including q itself)
+- **ε-closure of a set of states S**: The union of ε-closures of all states in S, formally: ε-closure(S) = ∪{ε-closure(q) | q ∈ S}
+
+This concept is crucial for NFA-to-DFA conversion, as it allows us to determine all states that are "effectively active" at any given point, accounting for spontaneous ε-transitions that don't consume input.
+
 #### Formal Definition
 
 An NFA is formally defined as a 5-tuple (Q, Σ, δ, q₀, F) where:
